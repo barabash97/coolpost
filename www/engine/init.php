@@ -14,6 +14,10 @@ class Init {
             die("ERROR HACK");
             exit;
         }
+        if(Config::$site_allowed == false){
+            echo 'Site close!!!!';
+            exit;
+        }
         if (!empty($_GET["url"])) {
             $url = $_GET["url"];
         }
