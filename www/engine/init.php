@@ -14,10 +14,7 @@ class Init {
             die("ERROR HACK");
             exit;
         }
-        if(Config::$site_allowed == false){
-            echo 'Site close!!!!';
-            exit;
-        }
+        $this->siteClose();
         if (!empty($_GET["url"])) {
             $url = $_GET["url"];
         }
@@ -26,7 +23,7 @@ class Init {
         $file = ENGINE_DIR . '/controllers/' . $url[0] . '.class.php';
         if (file_exists($file)) {
             require_once $file;
-        } else if (empty($url[0])) {
+        } else if (empty($url[0]) || $url[0] == "") {
             require_once ENGINE_DIR . '/controllers/index.class.php';
             exit;
         } else {
@@ -44,6 +41,12 @@ class Init {
             } else {
                 $controller->defaultInit();
             }
+        }
+    }
+    
+    public function siteClose(){
+         if(Config::$site_allowed == false){
+            echo Template::getTemplate("site_close");
         }
     }
 

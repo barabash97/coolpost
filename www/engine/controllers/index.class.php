@@ -9,15 +9,21 @@
 class Index implements CoreInterfaceController{
     
     public function __construct(){
-        echo 'Index CLASS';
+       $this->view();
     }
 
+    
+    
     public function defaultInit() {
         
     }
 
     public function view() {
-        
+        $file = Template::getTemplate("main");
+        $arr = array();
+        $arr["%title%"] = "La pagina iniziale";
+        $arr["%content%"] = "<p><b>Ciao Mondo!!!</b></p>";
+        echo Template::getReplaceContent($arr, $file);
     }
 
 }
