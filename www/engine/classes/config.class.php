@@ -9,10 +9,14 @@
 class Config {
     
     /* Configurazione DATABASE */
-    private $db_name = ""; 
-    private $db_host = ""; 
-    private $db_password = ""; 
-    private $db_user = ""; 
+    public $db = array(
+        'db_user' => "root",
+        'db_password' => "",
+        'db_host' => "localhost", 
+        'db_name' => "coolpost",
+        'db_prefix' => "cool_"
+    );
+    
     
     /* Configurazione generale del sito */
     public $title_site = 'Il mio sito web';
