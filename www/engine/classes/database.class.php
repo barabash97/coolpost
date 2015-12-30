@@ -19,18 +19,16 @@ class Database {
         );
     }
 
-    private function query($query) {
+    protected function query($query) {
         if (!empty($query)) {
             return $this->result_set = $this->mysqli->query($query);
         }
     }
 
-    public function insert($table, $data) {
-        if (!empty($table)) {
-            $table = $this->config->db["db_prefix"] . $table;
-        } else {
-            return false;
-        }
+    protected function insert($table_name, $data) {
+
+        $table = $this->tableExists($table_name);
+
         if (empty($data)) {
             return false;
         }
@@ -47,7 +45,37 @@ class Database {
         $this->query($query);
     }
 
-    public function __destruct() {
+    protected function select($table_name, $rows = "*", $where = null, $order = null) {
+        $table = $this->tableExists($table_name);
+        $query = 'SELECT ' . $rows . ' FROM ' . $table . ' ';
+        if ($where != null) {
+            $query .= 'WHERE ' . $where . ' ';
+        }
+        if ($order != null) {
+            $query .= 'ORDER BY ' . $order;
+        }
+        $this->query($query);
+    }
+
+    protected function tableExists($table) {
+        if (!empty($table)) {
+            $table = $this->config->db["db_prefix"] . $table;
+        } else {
+            return false;
+        }
+        $this->result_set = $this->query("SHOW TABLES FROM " . $this->config->db["db_name"] . " LIKE '" . $table . "'");
+        if ($this->result_set) {
+            if ($this->result_set->num_rows) {
+                return $table;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    protected function __destruct() {
         if (is_object($this->result_set)) {
             $this->result_set->close();
         }
