@@ -20,14 +20,18 @@ class Database {
                 );
     }
     
-    protected function query($query){
+    private function query($query){
         if(!empty($query)){
            $this->result_set = $this->mysqli->query($query);
         }
     }
     
+    private function insert($query){
+        $this->mysqli->query($query);
+    }
+    
     public function __destruct() {
-        if(!empty($this->result_set)){
+        if(!empty($this->result_set) || isset($this->result)){
             $this->result_set->close();
         }
         $this->mysqli->close();

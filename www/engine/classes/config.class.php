@@ -1,5 +1,11 @@
 <?php
 
+/*
+ * COOLPOST CMS
+ * GENERAL CONFIG 
+ * barabash97@gmail.com
+ */
+
 class Config {
     
     /* Configurazione DATABASE */
@@ -12,6 +18,7 @@ class Config {
     public $title_site = 'Il mio sito web';
     const URL_SITE = 'http://coolpost.it/';
     public static $site_allowed = false; //Indica se il sito è aperto 
+    public static $default_lang_site = "it";
     
     /* Template */
     const DIR_TEMPLATE = self::URL_SITE . 'template/';

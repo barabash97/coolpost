@@ -10,7 +10,7 @@ class Init {
     public $array = array();
 
     public function __construct($url = "") {
-        if(!defined('COOLPOST')){
+        if (!defined('COOLPOST')) {
             die("ERROR HACK");
             exit;
         }
@@ -43,9 +43,9 @@ class Init {
             }
         }
     }
-    
-    public function siteClose(){
-         if(Config::$site_allowed == false){
+
+    public function siteClose() {
+        if (Config::$site_allowed == false) {
             echo Template::getTemplate("site_close");
         }
     }

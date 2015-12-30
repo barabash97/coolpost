@@ -1,0 +1,22 @@
+<?php
+
+$languages = array(
+    'charset' => "utf-8",
+    'lang' => "it", 
+    'site_closed' => "Il sito è chiuso",
+    'welcome' => "Benvenuti!",
+    
+    //Login, Registration and Restore
+    'user_password' => "Password",
+    'user_confirm_password' => "Confermare la password",
+    'user_login' => "Login dell'utente",
+    'user_email' => "E-mail dell'utente",
+    'user_first_name' => "Il nome dell'utente",
+    'user_sur_name' => "Il cognome dell'utente",
+    'user_nation' => "Nazionalità",
+    
+    
+    //Articles
+    
+);
+?>
