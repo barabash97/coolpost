@@ -21,14 +21,18 @@ class GlobalDatabase {
     public function select($table_name, $rows = "*", $where = null, $order = null) {
         return $this->db->select($table_name, $rows, $where, $order);
     }
+    
+    public function deleteRows($table_name, $where = null){
+        return $this->db->deleteRows($table_name, $where);
+    }
+    
+    public function deleteTable($table_name){
+        return $this->db->deleteTable($table_name);
+    }
 
     public function query($query) {
         $this->db->query($query);
         return $this->db->getResultSet();
-    }
-
-    public function selectAll() {
-        return $this->db->query("SELECT * FROM cool_users");
     }
 
 }

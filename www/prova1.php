@@ -1,13 +1,12 @@
-<?php
+<?php 
 
-$mysqli =new mysqli("localhost", "root", "", "coolpost");
+if (isset($url[2])) {
+            $controller->$url[1]($url[2]);
+        } else {
+            if (isset($url[1])) {
 
-$result_set = $mysqli->query("SHOW TABLES FROM coolpost LIKE 'cool_users'");
-
-if($result_set->num_rows == 1){
-    echo 'true';
-}else {
-    echo 'false';
-}
-
-$mysqli->close();
+                $controller->$url[1]();
+            } else {
+                $controller->defaultInit();
+            }
+        }

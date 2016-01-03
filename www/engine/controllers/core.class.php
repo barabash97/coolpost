@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-class Core implements CoreInterfaceController {
+class Core  {
 
     public $database;
     
@@ -15,11 +15,19 @@ class Core implements CoreInterfaceController {
     }
     
     public function defaultInit() {
-        
+        echo 'default core';
     }
 
     public function view() {
-        
+        echo 'default view core';
+    }
+    
+    public function getErrorPage(){
+        echo 'getErrorPage';
+    }
+    
+    public function defaultPage() {
+        echo 'default page!';
     }
 
 }

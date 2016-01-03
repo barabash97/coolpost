@@ -59,22 +59,42 @@ class Database {
         $this->query($query);
     }
 
-    public function select($table_name, $rows = "*" , $where = null, $order = array()) {
+    public function select($table_name, $rows = "*", $where = null, $order = array()) {
         $table = $this->tableExists($table_name);
         $query = "SELECT " . $rows . " FROM " . $table;
         if ($where != null) {
             $query .= ' WHERE ' . $where;
         }
         if ($order != null && !empty($order)) {
-            foreach ($order as $key => $value){
-                $query .= " ORDER BY ".$key." ".$value; 
+            foreach ($order as $key => $value) {
+                $query .= " ORDER BY " . $key . " " . $value;
                 break;
             }
         }
         return $this->query($query);
     }
 
-    protected function tableExists($table) {
+    public function deleteRows($table_name, $where = null) {
+        $table = $this->tableExists($table_name);
+        $query = "DELETE FROM " . $table;
+        if ($where != null) {
+            $query .= " WHERE " . $where;
+            $this->result_set = $this->query($query);
+            if ($this->result_set) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+
+    public function deleteTable($table_name) {
+        $table = $this->tableExists($table_name);
+        $query = "DROP TABLE " . $table;
+        return $this->query($query);
+    }
+
+    private function tableExists($table) {
         if (!empty($table)) {
             $table = $this->config->db["db_prefix"] . $table;
         } else {

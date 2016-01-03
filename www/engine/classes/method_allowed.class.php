@@ -6,8 +6,9 @@
  * and open the template in the editor.
  */
 
-interface CoreInterfaceController {
-    public function defaultInit();
-    public function view();
+class MethodAllowed {
+    public static $method_allowed = array(
+        'index' => array("view"),
+        'user' => array()
+        );
 }
-

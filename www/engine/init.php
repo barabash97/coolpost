@@ -32,16 +32,33 @@ class Init {
             exit;
         }
         $controller = new $url[0];
-        if (isset($url[2])) {
-            $controller->$url[1]($url[2]);
-        } else {
-            if (isset($url[1])) {
-
-                $controller->$url[1]();
+        if (!empty($url[1]) && isset($url[1])) {
+            if ($this->methodAllowed($controller, $url[1]) == false) {
+                $controller->getErrorPage();
             } else {
-                $controller->defaultInit();
+                if (!empty($url[2])) {
+                    $controller->$url[1]($url[2]);
+                } else {
+                       $controller->$url[1]();
+                }
+            }
+        } else {
+            $controller->defaultPage();
+        }
+    }
+
+    public function methodAllowed($obj_name, $method_name) { //Return true o false
+        $method = strtolower($method_name);
+        $obj = (string) strtolower(get_class($obj_name));
+        $flag = false;
+        $array = MethodAllowed::$method_allowed[$obj];
+        for ($i = 0; $i < count($array); $i++) {
+            if ($method == $array[$i]) {
+                $flag = true;
+                
             }
         }
+        return $flag;
     }
 
     public function siteClose() {

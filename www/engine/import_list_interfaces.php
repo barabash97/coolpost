@@ -6,11 +6,7 @@
  * and open the template in the editor.
  */
 
-class Error extends Core {
-    
-    public function __construct(){
-        echo 'Error CLASS';
-    }
+$dir_interface = ENGINE_DIR . '/interfaces/'; // Directory con le interfacce
 
-}
 
+require_once $dir_interface . 'core.interface.php';

@@ -8,6 +8,7 @@
 
 $dir_class = ENGINE_DIR . '/classes/'; // Directory con i controllers
 
+
 /* Config files */
 require_once $dir_class . 'config.class.php';
 
@@ -17,3 +18,7 @@ require_once $dir_class . 'global_database.class.php';
 
 /* Template files */
 require_once $dir_class . 'template.class.php';
+
+/* Le classi che contengono solamente le variabili */
+require_once $dir_class . 'method_allowed.class.php';
+
