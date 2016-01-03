@@ -8,10 +8,10 @@
 
 class Core implements CoreInterfaceController {
 
-    protected $database;
+    public $database;
     
     public function __construct(){
-        $this->database = new Database();
+        $this->database = new GlobalDatabase();
     }
     
     public function defaultInit() {

@@ -11,6 +11,7 @@ class Database {
     private $mysqli;
     private $config;
     private $result_set;
+    private static $instance;
 
     public function __construct() {
         $this->config = new Config();
@@ -19,13 +20,26 @@ class Database {
         );
     }
 
-    protected function query($query) {
+    public static function getInstance() {
+        if (!self::$instance) { // If no instance then make one
+            self::$instance = new self();
+        }
+        return self::$instance;
+    }
+
+    public function query($query) {
         if (!empty($query)) {
             return $this->result_set = $this->mysqli->query($query);
+        } else {
+            return false;
         }
     }
 
-    protected function insert($table_name, $data) {
+    public function getResultSet() {
+        return $this->result_set;
+    }
+
+    public function insert($table_name, $data) {
 
         $table = $this->tableExists($table_name);
 
@@ -45,16 +59,19 @@ class Database {
         $this->query($query);
     }
 
-    protected function select($table_name, $rows = "*", $where = null, $order = null) {
+    public function select($table_name, $rows = "*" , $where = null, $order = array()) {
         $table = $this->tableExists($table_name);
-        $query = 'SELECT ' . $rows . ' FROM ' . $table . ' ';
+        $query = "SELECT " . $rows . " FROM " . $table;
         if ($where != null) {
-            $query .= 'WHERE ' . $where . ' ';
+            $query .= ' WHERE ' . $where;
         }
-        if ($order != null) {
-            $query .= 'ORDER BY ' . $order;
+        if ($order != null && !empty($order)) {
+            foreach ($order as $key => $value){
+                $query .= " ORDER BY ".$key." ".$value; 
+                break;
+            }
         }
-        $this->query($query);
+        return $this->query($query);
     }
 
     protected function tableExists($table) {
@@ -75,11 +92,13 @@ class Database {
         }
     }
 
-    protected function __destruct() {
+    public function __destruct() {
         if (is_object($this->result_set)) {
             $this->result_set->close();
         }
-        $this->mysqli->close();
+        if ($this->mysqli != null) {
+            $this->mysqli->close();
+        }
     }
 
 }

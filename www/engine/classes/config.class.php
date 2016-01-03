@@ -21,7 +21,7 @@ class Config {
     /* Configurazione generale del sito */
     public $title_site = 'Il mio sito web';
     const URL_SITE = 'http://coolpost.it/';
-    public static $site_allowed = false; //Indica se il sito è aperto 
+    public static $site_allowed = true; //Indica se il sito è aperto 
     public static $default_lang_site = "it";
     
     /* Template */

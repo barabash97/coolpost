@@ -10,7 +10,6 @@ class Index extends Core implements CoreInterfaceController {
 
     public function __construct() {
         parent::__construct();
-        $this->view();
     }
 
     public function defaultInit() {
@@ -20,7 +19,7 @@ class Index extends Core implements CoreInterfaceController {
     public function reg() {
         $n = mt_rand(1, 1000);
         $arr = array(
-            'login' => "admin454",
+            'login' => "admin454111a222",
             'password' => md5("hahahaha" . $n),
             'email' => "prova" . $n . "@gmail.com",
         );
@@ -33,6 +32,14 @@ class Index extends Core implements CoreInterfaceController {
             echo $ex->getMessage();
         }
     }
+    
+    public function select(){
+       $result = $this->database->select("users", "*", null, array("id, login" => "ASC"));
+       while($row = $result->fetch_assoc()){
+           print_r($row);
+           echo "</br>";
+       }
+    }
 
     public function view() {
         $file = Template::getTemplate("main");
@@ -40,6 +47,10 @@ class Index extends Core implements CoreInterfaceController {
         $arr["%title%"] = "La pagina iniziale";
         $arr["%content%"] = "<p><b>Ciao Mondo!!!</b></p>";
         echo Template::getReplaceContent($arr, $file);
+    }
+    
+    public function __destruct() {
+        ;
     }
 
 }

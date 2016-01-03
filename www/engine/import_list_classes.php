@@ -13,6 +13,7 @@ require_once $dir_class . 'config.class.php';
 
 /* Database files*/
 require_once $dir_class . 'database.class.php';
+require_once $dir_class . 'global_database.class.php';
 
 /* Template files */
 require_once $dir_class . 'template.class.php';
