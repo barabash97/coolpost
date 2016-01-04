@@ -29,7 +29,11 @@ class GlobalDatabase {
     public function deleteTable($table_name){
         return $this->db->deleteTable($table_name);
     }
-
+    
+    public function update($table_name, $data = null, $where = null){
+        return $this->db->update($table_name, $data, $where);
+    }
+    
     public function query($query) {
         $this->db->query($query);
         return $this->db->getResultSet();

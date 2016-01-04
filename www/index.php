@@ -17,13 +17,10 @@ define("ENGINE_DIR", ROOT_DIR . '/engine');
 /* Include & Require files*/
 
 require_once ENGINE_DIR . '/init.php';
-require_once ENGINE_DIR . '/import_list_controllers.php';
-require_once ENGINE_DIR . '/import_list_classes.php';
 require_once ENGINE_DIR . '/import_list_interfaces.php';
+require_once ENGINE_DIR . '/import_list_classes.php';
 require_once ENGINE_DIR . '/import_lang_site.php';
-
-
-
+require_once ENGINE_DIR . '/import_list_controllers.php';
 
 /* LOAD ROUTER */
 new Init();

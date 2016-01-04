@@ -22,24 +22,27 @@ class Init {
         $url = explode('/', $url);
         $file = ENGINE_DIR . '/controllers/' . $url[0] . '.class.php';
         if (file_exists($file)) {
-            require_once $file;
-        } else if (empty($url[0]) || $url[0] == "") {
-            require_once ENGINE_DIR . '/controllers/index.class.php';
-            exit;
+            if (!$this->controllerAllowed($url[0])) {
+                $controller = Error::getInstance();
+            } else {
+                $controller = new $url[0];
+            }
+        } else if (empty($url[0])) {
+            $controller = new Index();
         } else {
-            require ENGINE_DIR . '/controllers/error.class.php';
-            $controller = new Error();
-            exit;
+            $controller = Error::getInstance();
         }
-        $controller = new $url[0];
+
+
+
         if (!empty($url[1]) && isset($url[1])) {
-            if ($this->methodAllowed($controller, $url[1]) == false) {
-                $controller->getErrorPage();
+            if (!$this->methodAllowed($controller, $url[1])) {
+                $controller = Error::getInstance();
             } else {
                 if (!empty($url[2])) {
                     $controller->$url[1]($url[2]);
                 } else {
-                       $controller->$url[1]();
+                    $controller->$url[1]();
                 }
             }
         } else {
@@ -55,7 +58,22 @@ class Init {
         for ($i = 0; $i < count($array); $i++) {
             if ($method == $array[$i]) {
                 $flag = true;
-                
+            }
+        }
+        return $flag;
+    }
+
+    public function controllerAllowed($obj_name) {
+        if (is_object($obj_name)) {
+            $obj = (string) strtolower(get_class($obj_name));
+        } else {
+            $obj = $obj_name;
+        }
+        $array = MethodAllowed::$method_allowed;
+        $flag = false;
+        foreach ($array as $key => $value) {
+            if ($obj == $key) {
+                $flag = true;
             }
         }
         return $flag;

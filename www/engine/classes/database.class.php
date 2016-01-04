@@ -111,6 +111,22 @@ class Database {
             return false;
         }
     }
+    
+    public function update($table_name, $data = null, $where = null){
+        $table = $this->tableExists($table_name);
+        $query = "UPDATE ".$table." SET ";
+        $text_set = "";
+        foreach($data as $key => $value){
+            $text_set .= $key . " = '" . $value . "',";
+        }
+        $text = substr($text_set, 0,-1);
+        $query .= $text;
+        if($where != null){
+            $query .= " WHERE ".$where;
+        }
+        return $this->query($query);
+        
+    }
 
     public function __destruct() {
         if (is_object($this->result_set)) {

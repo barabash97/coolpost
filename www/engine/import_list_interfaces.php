@@ -9,4 +9,4 @@
 $dir_interface = ENGINE_DIR . '/interfaces/'; // Directory con le interfacce
 
 
-require_once $dir_interface . 'core.interface.php';
+$file = require_once $dir_interface . 'core.interface.php';

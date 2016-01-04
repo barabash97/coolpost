@@ -18,11 +18,14 @@ class Index extends Core {
 
     public function view() {
         
-       $file = Template::getTemplate("main");
-        $arr = array();
-        $arr["%title%"] = "La pagina iniziale";
-        $arr["%content%"] = "<p><b>Ciao Mondo!!!</b></p>";
-        echo Template::getReplaceContent($arr, $file);
+     echo $this->database->update("users", array(
+         "email" => "vladi@coolpost.it",
+         "login" => "vladi",
+         "password" => md5("prova"),
+         "firstname" => 'Vladimir',
+         "surname" => 'Barabash',
+         "nation" => "Ucraina"
+         ), "id = 2");
         
         
     }
@@ -36,7 +39,7 @@ class Index extends Core {
     }
     
     public function __destruct() {
-        ;
+        
     }
 
 }

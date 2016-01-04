@@ -5,8 +5,7 @@
  */
 
 interface CoreInterface {
-    public function defaultInit();
+    public function defaultPage();
     public function view();
-    public function getErrorPage();
 }
 
